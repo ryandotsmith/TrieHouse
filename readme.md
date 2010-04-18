@@ -7,5 +7,8 @@ I would like to see if there is a way to bypass AR for auto-complete queries. Id
 <pre>
 trie = Trie.new
 trie << "pie" << "apple" << "baseball"
+trie.has_word?("p") #=> true
+trie.has_word?("pi") #=> true
+trie.has_word?("pie") #=> true
 trie.each { |word| puts word.key }
 </pre>
