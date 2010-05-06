@@ -26,3 +26,17 @@ describe 'adding to the trie' do
   end
 
 end
+
+describe "suggesting a word" do
+  it "should return an array of suggestions" do
+    @trie = Trie.new
+    @trie << 'one'
+    @trie.suggests('o').should eql(['one'])
+  end
+
+  it "should return an array of suggestions" do
+    @trie = Trie.new
+    @trie << 'one' << 'only'
+    @trie.suggests('o').should eql(['one','only'])
+  end
+end

@@ -14,6 +14,7 @@ class Trie
   end
 
   def <<(word)
+    @current_word = word
     add( @root.children, word)  
   end
 
@@ -31,6 +32,21 @@ class Trie
     walk(@root,&block)
   end
 
+  def suggests(word)
+    first_char = word[0..0]
+    selected_node = @root.children.select {|node| node.key == first_char }[0]
+    suggestions = []
+    suggestion = ''
+    walk(selected_node) do |node|
+      suggestion << node.value
+      if node.children.empty?
+        suggestions << suggestion
+        suggestion = ''
+      end
+    end
+    suggestions
+  end
+
   private 
 
     def add(row, word)
@@ -40,8 +56,10 @@ class Trie
       node = row.select { |node| node.key == first_char}[0]
       if node.nil?
         row << new_node = Node.new(first_char)
+        new_node.value = @current_word if last_chars.empty? 
         add(new_node.children, last_chars)
       else
+        node.value = @current_word if last_chars.empty? 
         add(node.children, last_chars)
       end
     end
