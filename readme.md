@@ -12,3 +12,9 @@ trie.has_word?("pi") #=> true
 trie.has_word?("pie") #=> true
 trie.each { |word| puts word.key }
 </pre>
+
+<pre>
+trie = Trie.new
+trie << 'one' << 'only' << 'on'
+trie.suggests('o') #=> ['on','only','one']
+</pre>
