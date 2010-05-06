@@ -33,6 +33,7 @@ class Trie
   end
 
   def suggests(word)
+    #TODO: add support for suggesting based on more than the first char 
     first_char = word[0..0]
     selected_node = @root.children.select {|node| node.key == first_char }[0]
     suggestions = []
